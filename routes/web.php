@@ -27,3 +27,4 @@ Route::post('/user/store', [UserController::class, 'store'])->name('user.store')
 // Rute dari cabang dev (ProfileController)
 Route::get('/profile', [ProfileController::class, 'profile']);
 Route::get('/profile/{nama}/{kelas}/{npm}', [ProfileController::class, 'profile']);
+
