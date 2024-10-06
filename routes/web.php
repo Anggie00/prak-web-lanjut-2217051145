@@ -19,12 +19,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Rute dari cabang form-controller (UserController)
+// Rute untuk UserController
 Route::get('/user/profile', [UserController::class, 'profile']); 
 Route::get('/user/create', [UserController::class, 'create']); 
 Route::post('/user/store', [UserController::class, 'store'])->name('user.store'); 
 
-// Rute dari cabang dev (ProfileController)
+// Rute untuk ProfileController
 Route::get('/profile', [ProfileController::class, 'profile']);
 Route::get('/profile/{nama}/{kelas}/{npm}', [ProfileController::class, 'profile']);
-

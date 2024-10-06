@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create User</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Ayu Puspitasari - Buat Profil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
     <style>
         body {
-            /* Pink and white gradient background */
-            background: linear-gradient(45deg, #f8c9c9, #fdf2f2);
+            background: linear-gradient(45deg, #f8c9c9, #fdf2f2); /* Gradasi pink dan putih */
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -20,11 +19,11 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
-            max-width: 400px;
+            max-width: 450px; /* Ukuran maksimum kontainer */
             width: 100%;
         }
         .form-header {
-            background-color: #f4c2c2;
+            background-color: #f4c2c2; /* Warna latar belakang header */
             padding: 10px;
             border-radius: 10px 10px 0 0;
             text-align: center;
@@ -35,7 +34,7 @@
             font-weight: bold;
         }
         .btn-submit {
-            background-color: #f4c2c2;
+            background-color: #f4c2c2; /* Warna tombol */
             color: white;
             border: none;
             width: 100%;
@@ -43,33 +42,51 @@
             border-radius: 5px;
         }
         .btn-submit:hover {
-            background-color: #eab0b0;
+            background-color: #eab0b0; /* Warna tombol saat hover */
+        }
+        .text-danger {
+            font-size: 12px;
+            color: red; /* Merah untuk pesan kesalahan */
         }
     </style>
 </head>
 <body>
     <div class="form-container">
         <div class="form-header">
-            Create User
+            Buat Profil
         </div>
         
         <!-- Form Start -->
-        <form action="{{ route('user.store') }}" method="POST">
+        <form action="{{ route('user.store') }}" method="POST" novalidate>
             @csrf <!-- CSRF Token -->
             
             <div class="mb-3">
                 <label for="nama" class="form-label">Nama</label>
                 <input type="text" class="form-control" id="nama" name="nama" placeholder="Masukkan nama" required>
+                @foreach($errors->get('nama') as $msg)
+                <p class="text-danger">{{ $msg }}</p>
+                @endforeach
             </div>
             
             <div class="mb-3">
                 <label for="npm" class="form-label">NPM</label>
                 <input type="text" class="form-control" id="npm" name="npm" placeholder="Masukkan NPM" required>
+                @foreach($errors->get('npm') as $msg)
+                <p class="text-danger">{{ $msg }}</p>
+                @endforeach
             </div>
             
             <div class="mb-3">
                 <label for="kelas" class="form-label">Kelas</label>
-                <input type="text" class="form-control" id="kelas" name="kelas" placeholder="Masukkan kelas" required>
+                <select name="kelas_id" id="kelas" class="form-control" required>
+                    <option value="">Pilih Kelas</option>
+                    @foreach ($kelas as $kelasItem)
+                        <option value="{{ $kelasItem->id }}">{{ $kelasItem->nama_kelas }}</option>
+                    @endforeach
+                </select>
+                @foreach($errors->get('kelas_id') as $msg)
+                <p class="text-danger">{{ $msg }}</p>
+                @endforeach
             </div>
             
             <button type="submit" class="btn-submit">Submit</button>
