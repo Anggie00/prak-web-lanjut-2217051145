@@ -41,10 +41,10 @@
 <body>
 
 <div class="profile-card">
-    <img src="{{ asset('nn.jpg') }}" alt="Profile Image">
+    <img src="{{ asset('nn.jpg') }}" alt="Profile Image"> <!-- Gunakan gambar ini -->
     <div class="info">{{ $nama }}</div>
     <div class="info">{{ $npm }}</div>
-    <div class="info">{{ $nama_kelas?? 'Kelas tidak ditemukan' }}</div>
+    <div class="info">{{ $nama_kelas ?? 'Kelas tidak ditemukan' }}</div> <!-- Gunakan nama_kelas dari model -->
 </div>
 
 </body>
