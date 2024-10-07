@@ -11,7 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Membuat tabel 'users' dari branch Read-Data
         Schema::create('users', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama');
+            $table->string('npm')->unique();
+            $table->foreignId('kelas_id')->constrained('kelas')->onDelete('cascade');
+            $table->timestamps();
+        });
+
+        // Membuat tabel 'kelas' dari branch dev
+        Schema::create('kelas', function (Blueprint $table) {
             $table->id();
             $table->string('nama_kelas');
             $table->timestamps();
@@ -23,6 +33,8 @@ return new class extends Migration
      */
     public function down(): void
     {
+        // Menghapus tabel 'users' dan 'kelas' saat rollback
+        Schema::dropIfExists('users');
         Schema::dropIfExists('kelas');
     }
 };

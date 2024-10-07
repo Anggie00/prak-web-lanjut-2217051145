@@ -15,14 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function(){
-    return view ('welcome');
+Route::get('/', function() {
+    return view('welcome');
 });
 
-
+// Rute untuk ProfileController
 Route::get('/profile/{nama}/{kelas}/{npm}', [ProfileController::class, 'profile']);
-Route::get('/user/profile', [UserController::class, 'profile']);
-Route::get('/user/create', [UserController::class, 'create']);
-Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
-Route::get('/user', [UserController::class, 'index']);
+Route::get('/profile', [ProfileController::class, 'profile']); // Menyediakan rute tambahan untuk profile
 
+// Rute untuk UserController
+Route::get('/user/profile', [UserController::class, 'profile']); 
+Route::get('/user/create', [UserController::class, 'create']); 
+Route::post('/user/store', [UserController::class, 'store'])->name('user.store'); 
+Route::get('/user', [UserController::class, 'index']);

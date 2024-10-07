@@ -3,31 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anggie Armelia</title>
+    <title>Profile</title>
+
+    <!-- Menggunakan Tailwind CSS -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Menggunakan Bootstrap CSS (jika diperlukan) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #FFDFD6, #E3A5C7); /* Gradasi warna */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .profile-card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            width: 400px; 
+            text-align: center;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .profile-card img {
+            width: 120px; 
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+        .profile-card .info {
+            background-color: #fbcdd6; /* Warna latar belakang untuk informasi */
+            border-radius: 20px;
+            padding: 10px;
+            margin: 10px 0;
+            color: #000;
+            font-weight: bold;
+        }
+    </style>
 </head>
-<body class="flex items-center justify-center h-screen"  style="background: linear-gradient(to bottom right, #FFDFD6, #E3A5C7);">
+<body>
 
-    <div class="bg-white rounded-lg shadow-lg p-6 max-w-md text-center w-full">
-
-        <div class="w-32 h-32 mx-auto mb-4 relative">
-        <img id="anggie" class="rounded-full border border-gray-300 object-cover w-full h-full" src="{{ asset('images/nn.jpg') }}" alt="Foto Profil">
-        </div>
-        
-        <!-- Ubah space-y-2 menjadi space-y-4 untuk menambah jarak antar elemen -->
-        <div class="space-y-4">
-            <div class="bg-pink-200 py-2 px-4 rounded-md text-black font-semibold">
-                {{$nama}}
-            </div>
-
-            <div class="bg-pink-200 py-2 px-4 rounded-md text-black font-semibold">
-                {{$npm}}
-            </div>
-
-            <div class="bg-pink-200 py-2 px-4 rounded-md text-black font-semibold">
-                {{$nama_kelas ?? 'Kelas tidak ditemukan'}}
-            </div>
-        </div>
+    <div class="profile-card">
+        <img id="anggie" src="{{ asset('images/nn.jpg') }}" alt="Foto Profil">
+        <div class="info">{{ $nama }}</div>
+        <div class="info">{{ $npm }}</div>
+        <div class="info">{{ $nama_kelas ?? 'Kelas tidak ditemukan' }}</div> <!-- Menggunakan nama_kelas dari model -->
     </div>
 
 </body>
