@@ -5,29 +5,40 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Kelas; // Mengimpor model Kelas
 use App\Models\UserModel; // Mengimpor model UserModel
+use App\Http\Requests\UserControllerRequest;
 
 class UserController extends Controller
 {
-    // Fungsi untuk menampilkan halaman profil
-    public function profile($nama = "", $kelas = "", $npm = "") 
-    {
-        $data = [ 
-            'nama' => $nama, 
-            'kelas' => $kelas, 
-            'npm' => $npm, 
-        ]; 
+    public $userModel;
+    public $kelasModel;
 
-        return view('profile', $data); 
+    // Konstruktor untuk inisialisasi model
+    public function __construct()
+    {
+        $this->userModel = new UserModel();
+        $this->kelasModel = new Kelas();
+    }
+
+    // Fungsi index untuk menampilkan halaman daftar user
+    public function index()
+    {
+        $data = [
+            'title' => 'Create User',
+            'kelas' => $this->userModel->getUser(),
+        ];
+        return view('list_user', $data);
     }
 
     // Fungsi untuk menampilkan halaman create form
     public function create()
     {
-        // Mengambil semua data kelas dari database
-        $kelas = Kelas::all();
-        
-        // Mengirim data kelas ke view
-        return view('create_user', ['kelas' => $kelas]);
+        // Mengambil data kelas menggunakan kelasModel
+        $kelas = $this->kelasModel->getKelas();
+        $data = [
+            'title' => 'Create User',
+            'kelas' => $kelas,
+        ];
+        return view('create_user', $data);
     }
 
     // Fungsi store untuk menerima input dari form dan menampilkan profile
@@ -39,14 +50,29 @@ class UserController extends Controller
             'kelas_id' => 'required|exists:kelas,id',
         ]);
 
+        // Membuat user baru menggunakan UserModel
         $user = UserModel::create($validatedData);
 
+        // Memuat relasi kelas pada user
         $user->load('kelas');
 
+        // Mengarahkan ke halaman profile setelah penyimpanan berhasil
         return view('profile', [
             'nama' => $user->nama,
             'npm' => $user->npm,
             'nama_kelas' => $user->kelas->nama_kelas ?? 'Kelas tidak ditemukan',
         ]);
+    }
+
+    // Fungsi profile untuk menampilkan halaman profil pengguna
+    public function profile($nama = "", $kelas = "", $npm = "")
+    {
+        $data = [
+            'nama' => $nama,
+            'kelas' => $kelas,
+            'npm' => $npm,
+        ];
+
+        return view('profile', $data);
     }
 }

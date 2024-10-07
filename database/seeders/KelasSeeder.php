@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Kelas; // Pastikan model Kelas diimport
 
@@ -17,6 +16,7 @@ class KelasSeeder extends Seeder
             'D',
         ];
 
+        // Loop untuk membuat data kelas
         foreach ($data as $kelas) {
             Kelas::create([
                 'nama_kelas' => $kelas,

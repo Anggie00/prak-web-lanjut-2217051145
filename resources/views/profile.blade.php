@@ -4,10 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
+
+    <!-- Menggunakan Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Menggunakan Bootstrap CSS (jika diperlukan) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <style>
         body {
-            background: linear-gradient(135deg, #f8c6d1, #fad0c4);
+            background: linear-gradient(to bottom right, #FFDFD6, #E3A5C7); /* Gradasi warna */
             height: 100vh;
             display: flex;
             justify-content: center;
@@ -29,7 +34,7 @@
             margin-bottom: 20px;
         }
         .profile-card .info {
-            background-color: #fbcdd6;
+            background-color: #fbcdd6; /* Warna latar belakang untuk informasi */
             border-radius: 20px;
             padding: 10px;
             margin: 10px 0;
@@ -40,12 +45,12 @@
 </head>
 <body>
 
-<div class="profile-card">
-    <img src="{{ asset('nn.jpg') }}" alt="Profile Image"> <!-- Gunakan gambar ini -->
-    <div class="info">{{ $nama }}</div>
-    <div class="info">{{ $npm }}</div>
-    <div class="info">{{ $nama_kelas ?? 'Kelas tidak ditemukan' }}</div> <!-- Gunakan nama_kelas dari model -->
-</div>
+    <div class="profile-card">
+        <img id="anggie" src="{{ asset('images/nn.jpg') }}" alt="Foto Profil">
+        <div class="info">{{ $nama }}</div>
+        <div class="info">{{ $npm }}</div>
+        <div class="info">{{ $nama_kelas ?? 'Kelas tidak ditemukan' }}</div> <!-- Menggunakan nama_kelas dari model -->
+    </div>
 
 </body>
 </html>
