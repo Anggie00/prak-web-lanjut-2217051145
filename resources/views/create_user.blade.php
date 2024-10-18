@@ -7,7 +7,7 @@
             <h4 class="text-center" style="font-size: 1.75rem;">Create User</h4>
         </div>
         <div class="card-body">
-            <form action="{{ route('user.store') }}" method="POST">
+            <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <!-- Input Nama -->
                 <div class="mb-3">
@@ -28,6 +28,10 @@
                             <option value="{{ $kelasItem->id }}">{{ $kelasItem->nama_kelas }}</option>
                         @endforeach
                     </select>
+                </div>
+                <div class="mb-3">
+                    <input type="file" id="foto" name="foto"><br><br>
+                    <label for="foto">foto:</label><br>
                 </div>
                 <!-- Submit Button -->
                 <div class="d-grid gap-2">

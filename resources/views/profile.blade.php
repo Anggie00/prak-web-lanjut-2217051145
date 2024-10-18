@@ -3,32 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anggie Armelia</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Profil Mahasiswa</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom right, #f8cfd3, #fdf2f2);
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+        }
+        .card {
+            background-color: rgba(255, 255, 255, 0.9); 
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            padding: 50px;
+            width: 500px;
+            text-align: center;
+        }
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 25px !important;
+            border: 4px solid #ff69b4;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+        }
+        .info {
+            background-color: pink;
+            color: black;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 50px; /* Tinggi tetap untuk memusatkan konten */
+        }
+        .info p {
+            margin: 0; /* Hilangkan margin default dari <p> */
+            padding: 0; /* Hilangkan padding default dari <p> */
+        }
+    </style>
 </head>
-<body class="flex items-center justify-center h-screen"  style="background: linear-gradient(to bottom right, #FFDFD6, #E3A5C7);">
+<body>
+    <div class="card">
+        <img src="{{ asset($user->foto) }}" alt="Foto Profil" class="profile-img">
 
-    <div class="bg-white rounded-lg shadow-lg p-6 max-w-md text-center w-full">
-
-        <div class="w-32 h-32 mx-auto mb-4 relative">
-        <img id="anggie" class="rounded-full border border-gray-300 object-cover w-full h-full" src="{{ asset('images/nn.jpg') }}" alt="Foto Profil">
+        <div class="info">
+            <p class="label">Nama: {{$user->nama}}</p>
         </div>
-        
-        <!-- Ubah space-y-2 menjadi space-y-4 untuk menambah jarak antar elemen -->
-        <div class="space-y-4">
-            <div class="bg-pink-200 py-2 px-4 rounded-md text-black font-semibold">
-                {{$nama}}
-            </div>
-
-            <div class="bg-pink-200 py-2 px-4 rounded-md text-black font-semibold">
-                {{$npm}}
-            </div>
-
-            <div class="bg-pink-200 py-2 px-4 rounded-md text-black font-semibold">
-                {{$nama_kelas ?? 'Kelas tidak ditemukan'}}
-            </div>
+        <div class="info">
+            <p class="label">NPM: {{$user->npm}}</p>
+        </div>
+        <div class="info">
+            <p class="label">Kelas: {{$user->nama_kelas ?? 'Kelas Tidak Ditemukan'}}</p>
         </div>
     </div>
 
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
