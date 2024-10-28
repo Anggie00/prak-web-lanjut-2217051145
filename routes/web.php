@@ -21,10 +21,14 @@ Route::get('/', function() {
 
 // Rute untuk ProfileController
 Route::get('/profile/{nama}/{kelas}/{npm}', [ProfileController::class, 'profile']);
-Route::get('/profile', [ProfileController::class, 'profile']); // Menyediakan rute tambahan untuk profile
-
-// Rute untuk UserController
-Route::get('/user/profile', [UserController::class, 'profile']); 
-Route::get('/user/create', [UserController::class, 'create']); 
-Route::post('/user/store', [UserController::class, 'store'])->name('user.store'); 
+Route::get('/user/profile', [UserController::class, 'profile']);
+Route::get('/user/create', [UserController::class, 'create']);
+Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
 Route::get('/user', [UserController::class, 'index']);
+Route::get('/users/create', [UserController::class, 'create'])->name('user.create');
+Route::get('/users/{id}', [UserController::class, 'show'])->name('users.show');
+Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
+Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
+Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
+Route::delete('/user/{id}', [UserController::class, 'destroy'])->name('user.destroy');
+Route::get('/', [UserController::class, 'index'])->name('user.list');
