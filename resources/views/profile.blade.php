@@ -64,7 +64,13 @@
             <p class="label">NPM: {{$user->npm}}</p>
         </div>
         <div class="info">
-            <p class="label">Kelas : {{$user->nama_kelas ?? 'Kelas Tidak Ditemukan'}}</p>
+            <p class="label">Kelas: {{$user->kelas_id ?? 'Kelas Tidak Ditemukan'}}</p>
+        </div>
+        <div class="info">
+            <p class="label">Jurusan: {{$user->jurusan ?? 'Jurusan Tidak Ditemukan'}}</p>
+        </div>
+        <div class="info">
+            <p class="label">Semester: {{$user->semester ?? 'Semester Tidak Ditemukan'}}</p>
         </div>
     </div>
 

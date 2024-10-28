@@ -1,82 +1,78 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
-<style>
-    body {
-        background: linear-gradient(to right, #f8cfd4, #fdf3b4); 
-        color: #333;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-    }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile Cards</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+        }
 
-    .container {
-        background-color: rgba(255, 255, 255, 0.8); 
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-        max-width: 80%; 
-    }
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
 
-    .custom-table {
-        background-color: rgba(255, 255, 255, 0.5); 
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
-    }
+        .card {
+            width: 18rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
-    .custom-table th, .custom-table td {
-        background-color: rgba(255, 255, 255, 0.3); 
-        text-align: center;
-        vertical-align: middle;
-        color: #333;
-    }
+        .card img {
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
 
-    h2 {
-        text-align: center;
-        margin-bottom: 20px;
-        color: #333;
-    }
-</style>
+        .card-body {
+            text-align: center;
+        }
 
-<div class="container">
-    <h2>Daftar Mahasiswa</h2>
-    <table class="table table-striped table-bordered">
-        <thead class="thead-dark">
-        <a href="{{ route('user.create') }}" class="btn btn-primary mb-3">Tambah Pengguna Baru</a>
-            <tr>
-                <th>ID</th>
-                <th>Nama</th>
-                <th>NPM</th>
-                <th>Kelas</th>
-                <th>Foto</th>
-                <th>Aksi</th>
-            </tr>
-        </thead>
-        <tbody class="table-group-divider">
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-text {
+            font-size: 1rem;
+            color: #6c757d;
+        }
+
+        .btn {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card-container">
             @foreach ($users as $user)
-                <tr>
-                    <td>{{ $user->id }}</td>
-                    <td>{{ $user->nama }}</td>
-                    <td>{{ $user->npm }}</td>
-                    <td>{{ $user->kelas->nama_kelas ?? 'Kelas Tidak Ditemukan' }}</td>
-                    <td>
-                        <img src="{{ asset($user->foto) }}" alt="Foto User" width="100">
-                    </td>
-                    <td>
-                        <a href="{{ route('user.show', $user->id) }}" class="btn btn-primary btn-sm">View</a>
-                        <a href="{{ route('user.edit', $user->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{ route('user.destroy', $user->id) }}" method="POST" style="display:inline-block;">
-                            @method('DELETE')
-                            @csrf
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah anda yakin ingin menghapus user ini?')">Delete</button>
-                        </form>
-                    </td>
-                </tr>
+            <div class="card">
+                <img src="{{ asset($user->foto ?? 'uploads/img/default.jpg') }}" class="card-img-top" alt="User Photo">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $user->nama }}</h5>
+                    <p class="card-text">NPM: {{ $user->npm }}</p>
+                    <p class="card-text">Kelas: {{ $user->kelas->nama_kelas ?? 'Kelas tidak ditemukan' }}</p>
+                    <p class="card-text">Jurusan: {{ $user->jurusan }}</p>
+                    <p class="card-text">Semester: {{ $user->semester }}</p>
+                    <a href="{{ route('users.show', $user->id) }}" class="btn btn-primary">Detail Profile</a>
+                </div>
+            </div>
             @endforeach
-        </tbody>
-    </table>
-</div>
+        </div>
+    </div>
 
-@endsection
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
