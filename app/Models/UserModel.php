@@ -22,10 +22,28 @@ class UserModel extends Model
     }
 
     // Fungsi untuk mendapatkan data user dengan join ke tabel kelas (dari Read-Data)
-    public function getUser()
+    public function getUser($id = null)
     {
+        // Mengambil data user dengan informasi kelas
+        if ($id != null) {
+            return $this->join('kelas', 'kelas.id', '=', 'user.kelas_id')
+                ->select('user.*', 'kelas.nama_kelas')
+                ->where('user.id', $id)
+                ->first();
+        }
+
         return $this->join('kelas', 'kelas.id', '=', 'user.kelas_id')
-                    ->select('user.*', 'kelas.nama_kelas as nama_kelas')
-                    ->get();
+            ->select('user.*', 'kelas.nama_kelas as nama_kelas', 'user.jurusan', 'user.semester') // Ambil jurusan dan semester
+            ->get();
     }
+
+    // Kolom yang dapat diisi secara massal
+    protected $fillable = [
+        'nama',
+        'npm',
+        'kelas_id',
+        'jurusan', // Tambahkan jurusan
+        'semester', // Tambahkan semester
+        'foto',
+    ];
 }

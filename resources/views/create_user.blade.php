@@ -8,7 +8,7 @@
         </div>
         
         <!-- Form Start -->
-        <form action="{{ route('user.store') }}" method="POST" novalidate>
+        <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data" novalidate>
             @csrf <!-- CSRF Token -->
             
             <div class="mb-3">
@@ -26,6 +26,30 @@
                 <p class="text-danger">{{ $msg }}</p>
                 @endforeach
             </div>
+
+            <!-- Jurusan Field -->
+            <div class="mb-3">
+                <label for="jurusan" class="form-label">Jurusan</label>
+                <select name="jurusan" id="jurusan" class="form-select" required>
+                    <option value="" disabled selected>Pilih Jurusan</option>
+                    <option value="Teknik Informatika">Ilmu Komputer</option>
+                    <option value="Sistem Informasi">Sistem Informasi</option>
+                    <option value="Manajemen Informatika">Manajemen Informatika</option>
+                    <!-- Tambahkan opsi lain sesuai kebutuhan -->
+                </select>
+                @foreach($errors->get('jurusan') as $msg)
+                <p class="text-danger">{{ $msg }}</p>
+                @endforeach
+            </div>
+            
+            <!-- Semester Field -->
+            <div class="mb-3">
+                <label for="semester" class="form-label">Semester</label>
+                <input type="number" class="form-control" id="semester" name="semester" placeholder="Masukkan Semester" min="1" required>
+                @foreach($errors->get('semester') as $msg)
+                <p class="text-danger">{{ $msg }}</p>
+                @endforeach
+            </div>
             
             <div class="mb-3">
                 <label for="kelas" class="form-label">Kelas</label>
@@ -39,9 +63,14 @@
                 <p class="text-danger">{{ $msg }}</p>
                 @endforeach
             </div>
+
+            <div class="mb-3">
+                <label for="foto" class="form-label">Foto</label>
+                <input type="file" id="foto" name="foto">
+            </div>
             
             <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-primary" style="background-color: #f4c2c2; color: white; border: none; border-radius: 5px;">Submit</button>
+                <button type="submit" class="btn btn-primary" style="background-color: #f9d7da; color: #333; border-radius: 10px; border: none;">Submit</button>
             </div>
         </form>
         <!-- Form End -->
@@ -65,7 +94,7 @@
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
-        max-width: 450px; /* Ukuran maksimum kontainer */
+        max-width: 450px;
         width: 100%;
     }
     .form-header {
@@ -78,17 +107,6 @@
     }
     .form-label {
         font-weight: bold;
-    }
-    .btn-submit {
-        background-color: #f4c2c2; /* Warna tombol */
-        color: white;
-        border: none;
-        width: 100%;
-        padding: 10px;
-        border-radius: 5px;
-    }
-    .btn-submit:hover {
-        background-color: #eab0b0; /* Warna tombol saat hover */
     }
     .text-danger {
         font-size: 12px;
